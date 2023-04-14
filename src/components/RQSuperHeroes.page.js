@@ -20,7 +20,11 @@ export const RQSuperHeroesPage = () => {
     fetchSuperHeroes, 
     {
       onSuccess,
-      onError
+      onError,
+      select: (data) => {
+        const superHeroNames = data.data.map(hero => hero.name)
+        return superHeroNames
+      }
     })
 
   console.log({ isLoading, isFetching })
@@ -37,9 +41,14 @@ export const RQSuperHeroesPage = () => {
     <>
       <h2>RQSuperHeroes Page</h2>
       <button onClick={refetch}>Fetch heroes</button>
-      {
+      {/* {
         data?.data.map(hero => {
           return <div key={hero.name}>{hero.name}</div>
+        })
+      } */}
+      {
+        data.map(heroName => {
+          return <div>{heroName}</div>
         })
       }
     </>
