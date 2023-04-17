@@ -1,12 +1,6 @@
-import { useQuery } from 'react-query'
-import axios from 'axios'
-
-const fetchSuperHeroes = () => {
-  return axios.get('http://localhost:4000/superheroes')
-}
+import { useSuperHeroesData } from '../hooks/useSuperHeroesData'
 
 export const RQSuperHeroesPage = () => {
-
   const onSuccess = (data) => {
     console.log('Perform side effect after data fetching', data)
   }
@@ -15,17 +9,7 @@ export const RQSuperHeroesPage = () => {
     console.log('Perform side effect after encountering error', error)
   }
 
-  const { isLoading, data, isError, error, isFetching, refetch } = useQuery(
-    'super-heroes', 
-    fetchSuperHeroes, 
-    {
-      onSuccess,
-      onError,
-      select: (data) => {
-        const superHeroNames = data.data.map(hero => hero.name)
-        return superHeroNames
-      }
-    })
+  const { isLoading, data, isError, error, isFetching, refetch } = useSuperHeroesData(onSuccess, onError)
 
   console.log({ isLoading, isFetching })
 
