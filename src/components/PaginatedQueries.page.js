@@ -8,7 +8,13 @@ const fetchColors = (pageNumber) => {
 
 export const PaginatedQueriesPage = () => {
   const [pageNumber, setPageNumber] = useState(1)
-  const { isLoading, isError, error, data } = useQuery(['colors', pageNumber], () => fetchColors(pageNumber))
+  const { isLoading, isError, error, data, isFetching } = useQuery(
+    ['colors', pageNumber],
+    () => fetchColors(pageNumber),
+    {
+      keepPreviousData: true
+    }
+  )
 
   if (isLoading) {
     return <h2>Loading...</h2>
@@ -35,6 +41,7 @@ export const PaginatedQueriesPage = () => {
         <button onClick={() => setPageNumber(page => page - 1)} disabled={pageNumber === 1}>Prev page</button>
         <button onClick={() => setPageNumber(page => page + 1)} disabled={pageNumber === 4}>Next page</button>
       </div>
+      { isFetching && 'Loading' }
     </>
   )
 }
