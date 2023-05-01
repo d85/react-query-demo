@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { QueryClientProvider, QueryClient } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { HomePage } from './components/Home.page'
+import { InfiniteQueriesPage } from './components/InfiniteQueries.page'
 import { PaginatedQueriesPage } from './components/PaginatedQueries.page'
 import { DependentQueriesPage } from './components/DependentQueries.page'
 import { ParallelQueriesPage } from './components/ParallelQueries.page'
@@ -31,11 +32,12 @@ function App() {
           </ul>
         </nav>
         <Routes>
-          <Route path='rq-paginated' element={<PaginatedQueriesPage/>} />
-          <Route path='rq-dependent' element={<DependentQueriesPage email='test@test.com'/>} />
-          <Route path='rq-dynamic-parallel' element={<DynamicParallelPage heroIds={[1, 3]}/>} />
-          <Route path='rq-parallel' element={<ParallelQueriesPage />} />
-          <Route path='rq-super-heroes/:heroId' element={<RQSuperHeroPage />} />
+          <Route path='/rq-infinite' element={<InfiniteQueriesPage/>} />
+          <Route path='/rq-paginated' element={<PaginatedQueriesPage/>} />
+          <Route path='/rq-dependent' element={<DependentQueriesPage email='test@test.com'/>} />
+          <Route path='/rq-dynamic-parallel' element={<DynamicParallelPage heroIds={[1, 3]}/>} />
+          <Route path='/rq-parallel' element={<ParallelQueriesPage />} />
+          <Route path='/rq-super-heroes/:heroId' element={<RQSuperHeroPage />} />
           <Route path='/super-heroes' element={<SuperHeroesPage />} />
           <Route path='/rq-super-heroes' element={<RQSuperHeroesPage />} />
           <Route path='/' element={<HomePage />} />
